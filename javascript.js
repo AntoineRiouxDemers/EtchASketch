@@ -1,0 +1,1 @@
+const gridDiv = document.getElementById(grid);

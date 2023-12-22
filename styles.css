@@ -1,0 +1,31 @@
+*{
+    margin : 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+#header{
+    height: 5vh;
+}
+
+#footer{
+    height: 2vh;
+}
+
+#main{
+    flex: 1;
+}
+
+.ulist{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
