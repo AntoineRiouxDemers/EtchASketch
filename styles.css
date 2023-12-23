@@ -31,10 +31,18 @@ body{
 }
 
 #grid{
+    margin: 1em 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    /* width: 60vw;
-    height: 60vw; */
+    width: 30vw;
+    height: 30vw;
+    border: solid 0.1em;
 }
+
+.hover{
+    background-color: black;
+}
+
+/* .pixels:hover{
+    background-color: black;
+} */

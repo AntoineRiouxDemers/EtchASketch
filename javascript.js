@@ -1,9 +1,22 @@
 const gridDiv = document.getElementById('grid');
 const dimensionBtn = document.getElementById('dimensionBtn');
 var currentDimension;
-dimensionBtn.addEventListener('click', () => dimensionClicked());
+const gridDimension = 30 //dimension in vertical width VW set for the grid itself
 
+
+dimensionBtn.addEventListener('click', () => dimensionClicked());
 if(currentDimension == null) setGrid(16);
+
+function game(){
+    const pixels = document.querySelectorAll('.pixels');
+
+    pixels.forEach(pixel => {
+        pixel.addEventListener('mouseover', function () {
+            pixel.classList.add('hover');
+        });
+    });
+}
+
 
 function setGrid(dimension){
     gridDiv.innerHTML = '';
@@ -12,13 +25,14 @@ function setGrid(dimension){
     for(let i = 0; i < dimension; i++){
         let column = gridDiv.appendChild(document.createElement('div'));
         column.classList.add('columns');
-        column.setAttribute('style', 'Display: flex; justify-content: center; align-items: center;');
+        column.setAttribute('style', 'Display: flex; width: ' + gridDimension + 'vw; height: ' + gridDimension / dimension + 'vw;');
         for(let i = 0; i< dimension; i++){
             let pixel = column.appendChild(document.createElement('div'));
             pixel.classList.add('pixels')
-            pixel.setAttribute('style', 'border: solid 0.1px; height: 1px; width: 1px;');
+            pixel.setAttribute('style', 'height: ' + gridDimension / dimension + 'vw; width: ' + gridDimension / dimension + 'vw;');
         }
     }
+    game();
 }
 
 function dimensionClicked(){
