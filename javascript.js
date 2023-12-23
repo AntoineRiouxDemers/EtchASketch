@@ -1,22 +1,39 @@
 const gridDiv = document.getElementById('grid');
 const dimensionBtn = document.getElementById('dimensionBtn');
-var currentDimension;
+const clearBtn = document.getElementById('clearBtn');
+const rgbBtn = document.getElementById('rgbBtn');
+const progressiveBtn = document.getElementById('progressBtn');
+const blackBtn = document.getElementById('blackBtn');
 const gridDimension = 30 //dimension in vertical width VW set for the grid itself
-
+var currentDimension;
 
 dimensionBtn.addEventListener('click', () => dimensionClicked());
 if(currentDimension == null) setGrid(16);
 
+
+
 function game(){
-    const pixels = document.querySelectorAll('.pixels');
+
+    let pixels = document.querySelectorAll('.pixels');
 
     pixels.forEach(pixel => {
         pixel.addEventListener('mouseover', function () {
             pixel.classList.add('hover');
         });
     });
+
+    clearBtn.addEventListener('click', () => clearGrid());
+    // rgbBtn.addEventListener('click', () => setHover('rgb'));
+    // blackNwhiteBtn.addEventListener('click', () => setHover('black'))
 }
 
+function clearGrid(){
+    let pixels = document.querySelectorAll('.pixels');
+
+    pixels.forEach(pixel => {
+        pixel.classList.remove('hover');
+    }); 
+}
 
 function setGrid(dimension){
     gridDiv.innerHTML = '';
