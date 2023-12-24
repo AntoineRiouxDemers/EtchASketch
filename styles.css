@@ -39,6 +39,10 @@ body{
     border: solid 0.1em;
 }
 
-.hover{
+.black{
     background-color: black;
+}
+
+.rgb{
+    background-color: red;
 }
