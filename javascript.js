@@ -4,15 +4,14 @@ const clearBtn = document.getElementById('clearBtn');
 const rgbBtn = document.getElementById('rgbBtn');
 const progressiveBtn = document.getElementById('progressBtn');
 const blackBtn = document.getElementById('blackBtn');
-const gridDimension = 30 //dimension in vertical width VW set for the grid itself
+var gridDimension = parseInt(getComputedStyle(document.getElementById('grid')).getPropertyValue('width')); //dimension in vertical width VW set for the grid itself
 var currentDimension;
 var currentColor = 'black';
 
 dimensionBtn.addEventListener('click', () => dimensionClicked());
 if(currentDimension == null) setGrid(16);
 
-
-//main game function
+// Main game function
 function game(){
 
     let pixels = document.querySelectorAll('.pixels');
@@ -20,21 +19,36 @@ function game(){
     pixels.forEach(pixel => {
         pixel.addEventListener('mouseover', function () {
             setColor(pixel);
-            console.log(pixel.classList);
-
         });
     });
 
+    document.addEventListener('mouseover', () => adjustGrid());
     clearBtn.addEventListener('click', () => clearGrid());
     rgbBtn.addEventListener('click', () => currentColor = 'rgb');
     blackBtn.addEventListener('click', () => currentColor = 'black');
+}
+
+// Adjust grid with screen sizes
+function adjustGrid(){
+    let pixels = document.querySelectorAll('.pixels');
+    let columns = document.querySelectorAll('.columns');
+    gridDimension = parseInt(getComputedStyle(document.getElementById('grid')).getPropertyValue('width'))
+
+    columns.forEach(column => {
+        column.style.height = gridDimension / currentDimension + 'px';
+        column.style.width = gridDimension + 'px';
+    });
+
+    pixels.forEach(pixel => {
+        pixel.style.height = gridDimension / currentDimension + 'px';
+        pixel.style.width = gridDimension / currentDimension + 'px';
+    });
 }
 
 //Set Color of pixel when mouse hover it
 function setColor(pixel, isAlreadyColored){
     switch(currentColor){
         case 'rgb':
-            console.log('rgb(' + getRandomColor() + ')')
             pixel.style.backgroundColor = 'rgb(' + getRandomColor() + ')';
             break;
         case 'progressive':
@@ -42,6 +56,10 @@ function setColor(pixel, isAlreadyColored){
         default:
             pixel.style.backgroundColor = currentColor;
     }
+}
+
+function getProgressive(pixel){
+    
 }
 
 //Return a random rgb array
@@ -66,11 +84,11 @@ function setGrid(dimension){
     for(let i = 0; i < dimension; i++){
         let column = gridDiv.appendChild(document.createElement('div'));
         column.classList.add('columns');
-        column.setAttribute('style', 'Display: flex; width: ' + gridDimension + 'vw; height: ' + gridDimension / dimension + 'vw;');
+        column.setAttribute('style', 'Display: flex; width: ' + gridDimension + 'px; height: ' + gridDimension / dimension + 'px;');
         for(let i = 0; i< dimension; i++){
             let pixel = column.appendChild(document.createElement('div'));
             pixel.classList.add('pixels');
-            pixel.setAttribute('style', 'height: ' + gridDimension / dimension + 'vw; width: ' + gridDimension / dimension + 'vw;');
+            pixel.setAttribute('style', 'height: ' + gridDimension / dimension + 'px; width: ' + gridDimension / dimension + 'px;');
         }
     }
     game();
