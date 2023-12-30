@@ -26,6 +26,7 @@ function game(){
     clearBtn.addEventListener('click', () => clearGrid());
     rgbBtn.addEventListener('click', () => currentColor = 'rgb');
     blackBtn.addEventListener('click', () => currentColor = 'black');
+    progressiveBtn.addEventListener('click', () => currentColor = 'progressive');
 }
 
 // Adjust grid with screen sizes
@@ -52,6 +53,15 @@ function setColor(pixel, isAlreadyColored){
             pixel.style.backgroundColor = 'rgb(' + getRandomColor() + ')';
             break;
         case 'progressive':
+            let colorArray = (pixel.style.backgroundColor).replace(/[^\d\,]/g, '').split(',');
+            if(colorArray[0] === colorArray[1]){
+                let newColor = parseInt(colorArray[0]) - 50; //current shade of black + adding shade
+                console.log(colorArray[0]);
+                console.log(newColor);
+                pixel.style.backgroundColor = 'rgb(' + newColor + ',' + newColor + ',' + newColor + ')';
+            } else{
+                pixel.style.backgroundColor = 'rgb(200,200,200)';
+            }
             break;
         default:
             pixel.style.backgroundColor = currentColor;
